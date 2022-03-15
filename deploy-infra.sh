@@ -9,6 +9,7 @@ STACK_NAME=awsbootstrap
 REGION=eu-central-1
 CLI_PROFILE=aleksa446-admin
 EC2_INSTANCE_TYPE=t2.micro
+DOMAIN=awsbootstrap.com
 
 # Get AWS account ID
 AWS_ACCOUNT_ID=`aws sts get-caller-identity --profile $CLI_PROFILE --query "Account" --output text`
@@ -56,6 +57,7 @@ aws cloudformation deploy \
   --capabilities CAPABILITY_NAMED_IAM \
   --parameter-overrides \
     EC2InstanceType=$EC2_INSTANCE_TYPE \
+    Domain=$DOMAIN \
     GitHubOwner=$GH_OWNER \
     GitHubRepo=$GH_REPO \
     GitHubBranch=$GH_BRANCH \
