@@ -177,7 +177,9 @@ Resources:
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/CloudWatchFullAccess
         - arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforAWSCodeDeploy
-      Policies: # allows our instance to query EC2 for tags
+        - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+        - arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy
+      Policies:
         - PolicyName: ec2DescribeTags
           PolicyDocument:
             Version: 2012-10-17
