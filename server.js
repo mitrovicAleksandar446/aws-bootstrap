@@ -23,7 +23,7 @@ if (fs.existsSync(httpsKey) && fs.existsSync(httpsCert)) {
   });
 }
 
-console.log('Starting http server')
+console.log('Starting http server');
 const message = `Hello HTTP World from ${hostname()} in ${STACK_NAME}\n`;
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
