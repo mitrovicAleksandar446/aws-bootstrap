@@ -11,6 +11,10 @@ CLI_PROFILE=aleksa446-admin
 EC2_INSTANCE_TYPE=t2.micro
 DOMAIN=awsbootstrap.com
 
+# Get SSL certificate ARN
+CERT=`aws acm list-certificates --region $REGION --profile $CLI_PROFILE --output text \
+        --query "CertificateSummaryList[?DomainName=='$DOMAIN'].CertificateArn | [0]"`
+
 # Get AWS account ID
 AWS_ACCOUNT_ID=`aws sts get-caller-identity --profile $CLI_PROFILE --query "Account" --output text`
 CODEPIPELINE_BUCKET="$STACK_NAME-$REGION-codepipeline-$AWS_ACCOUNT_ID"
@@ -58,6 +62,7 @@ aws cloudformation deploy \
   --parameter-overrides \
     EC2InstanceType=$EC2_INSTANCE_TYPE \
     Domain=$DOMAIN \
+    Certificate=$CERT \
     GitHubOwner=$GH_OWNER \
     GitHubRepo=$GH_REPO \
     GitHubBranch=$GH_BRANCH \
